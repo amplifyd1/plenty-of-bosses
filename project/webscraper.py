@@ -1,3 +1,4 @@
+import bs4
 from bs4 import BeautifulSoup
 import requests
 
@@ -13,4 +14,18 @@ def get_job_titles(content):
         jobs.append(a["title"])
   return(jobs)
 
-print(get_job_titles(content))
+
+def get_companies(content):
+  companies = []
+  for div in content.find_all(name="div", attrs={"class":"row"}):
+      company = div.find_all(name="span", attrs={"class":"company"})
+      if len(company) > 0:
+        for c in company:
+          companies.append(c.text.strip())
+      else:
+        second_try = div.find_all(name="span", attrs={"class":"result-link-source"})
+        for span in second_try:
+          companies.append(span.text.strip())
+  return(companies)
+
+print(get_companies(content))
