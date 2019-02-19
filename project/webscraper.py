@@ -28,4 +28,14 @@ def get_companies(content):
           companies.append(span.text.strip())
   return(companies)
 
-print(get_companies(content))
+def get_locations(content):
+  locations = []
+  spans = content.findAll('span', attrs={'class': 'location'})
+  for span in spans:
+    locations.append(span.text)
+  return(locations)
+
+
+
+
+print(get_locations(content))
