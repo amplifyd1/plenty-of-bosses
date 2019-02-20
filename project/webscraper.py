@@ -35,7 +35,11 @@ def get_locations(content):
     locations.append(span.text)
   return(locations)
 
+def get_summary(content):
+  summaries = []
+  spans = content.findAll('span', attrs={'class':'summary'})
+  for span in spans:
+    summaries.append(span.text.strip())
+  return(summaries)
 
-
-
-print(get_locations(content))
+print(get_summary(content))
